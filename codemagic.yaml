@@ -1,58 +1,57 @@
-workflows:
-  android-workflow:
-    instance_type: mac_mini_m1
-    name: Android Workflow
-    environment:
-      groups:
-        - shorebird
-      flutter: stable
-    scripts:
-      - name: 🐦 Setup Shorebird
-        script: |
-          # Install Shorebird
-          curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | bash
+android-workflow:
+  instance_type: mac_mini_m1
+  name: Android Workflow
+  environment:
+    groups:
+      - shorebird
+    flutter: stable
+  scripts:
+    - name: 🐦 Setup Shorebird
+      script: |
+        # Install Shorebird
+        curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | bash
 
-          # Add Shorebird to PATH
-          echo PATH="$HOME/.shorebird/bin:$PATH" >> $CM_ENV
-      - name: 🚀 Shorebird Patch
-        script: shorebird patch android --force
+        # Add Shorebird to PATH
+        echo PATH="$HOME/.shorebird/bin:$PATH" >> $CM_ENV
+    - name: 🚀 Shorebird Patch
+      script: shorebird patch android --force
 
-  advanced-example:
-  publishing:
-      email:
-        recipients:
-          - dev.muj.i@icloud.com
-        notify:
-          success: true
-          failure: true
-    name: Advanced Example
-    environment:
-      vars:
-        TYPE: "release" # patch or release
-      groups:
-        - shorebird
-      flutter: stable
-    scripts:
-      - name: 🐦 Setup Shorebird
-        script: |
-          # Install Shorebird
-          curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | bash
+advanced-example:
+publishing:
+    email:
+      recipients:
+        - dev.muj.i@icloud.com
+      notify:
+        success: true
+        failure: true
+  name: Advanced Example
+  environment:
+    vars:
+      TYPE: "release" # patch or release
+    groups:
+      - shorebird
+    flutter: stable
+  scripts:
+    - name: 🐦 Setup Shorebird
+      script: |
+        # Install Shorebird
+        curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | bash
 
-          # Add Shorebird to PATH
-          echo PATH="$HOME/.shorebird/bin:$PATH" >> $CM_ENV
-      - name: 🙌 Shorebird Build
-        script: |
-          # If type is not patch or release, exit with error
-          if [ "$TYPE" != "patch" ] && [ "$TYPE" != "release" ]; then
-            echo "TYPE must be either patch or release"
-            exit 1
-          fi
+        # Add Shorebird to PATH
+        echo PATH="$HOME/.shorebird/bin:$PATH" >> $CM_ENV
+    - name: 🙌 Shorebird Build
+      script: |
+        # If type is not patch or release, exit with error
+        if [ "$TYPE" != "patch" ] && [ "$TYPE" != "release" ]; then
+          echo "TYPE must be either patch or release"
+          exit 1
+        fi
 
-          # Check type and run corresponding command
-          if [ "$TYPE" == "patch" ]; then
-            echo "🩹 Running patch command"
-            shorebird patch android --force
-          elif [ "$TYPE" == "release" ]; then
-            echo "🚀 Running release command"
-            shorebird release android --force
-          fi
+        # Check type and run corresponding command
+        if [ "$TYPE" == "patch" ]; then
+          echo "🩹 Running patch command"
+          shorebird patch android --force
+        elif [ "$TYPE" == "release" ]; then
+          echo "🚀 Running release command"
+          shorebird release android --force
+        fi
