@@ -1,5 +1,5 @@
 workflows:
-  macos-linux-example:
+  android-workflow:
     instance_type: mac_mini_m1
     name: Android Workflow
     environment:
