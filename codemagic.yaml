@@ -13,7 +13,5 @@ workflows:
           curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | bash
           # Add Shorebird to PATH
           echo PATH="$HOME/.shorebird/bin:$PATH" >> $CM_ENV
-      - name: 🐦 Login to Shorebird
-        script: shorebird login --token $SHOREBIRD_TOKEN
-      - name: 🚀 Shorebird release
-        script: shorebird release android
+      - name: 🚀 Shorebird Patch
+        script: shorebird patch android
