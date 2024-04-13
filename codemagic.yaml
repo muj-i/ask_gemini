@@ -15,7 +15,7 @@ workflows:
           # Add Shorebird to PATH
           echo PATH="$HOME/.shorebird/bin:$PATH" >> $CM_ENV
       - name: 🚀 Shorebird Patch
-        script: shorebird patch android --force
+        script: shorebird patch android
 
   advanced-example:
     name: Advanced Example
@@ -44,8 +44,8 @@ workflows:
           # Check type and run corresponding command
           if [ "$TYPE" == "patch" ]; then
             echo "🩹 Running patch command"
-            shorebird patch android --force
+            shorebird patch android
           elif [ "$TYPE" == "release" ]; then
             echo "🚀 Running release command"
-            shorebird release android --force
+            shorebird release android
           fi
