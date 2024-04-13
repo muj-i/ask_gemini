@@ -17,13 +17,6 @@ android-workflow:
       script: shorebird patch android --force
 
 advanced-example:
-publishing:
-    email:
-      recipients:
-        - dev.muj.i@icloud.com
-      notify:
-        success: true
-        failure: true
   name: Advanced Example
   environment:
     vars:
