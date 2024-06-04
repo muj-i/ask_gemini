@@ -39,7 +39,7 @@ AskGemini UI
 
 ### Video demonstration of AskGemini
 
-![Video](https://www.linkedin.com/posts/muj-i_just-created-a-new-app-called-askgemini-activity-7203906546500579328-_4ey/?utm_source=share&utm_medium=member_desktop)
+[Video](https://www.linkedin.com/posts/muj-i_just-created-a-new-app-called-askgemini-activity-7203906546500579328-_4ey/)
 
 
 <div style="display: flex; flex-wrap: wrap;">
