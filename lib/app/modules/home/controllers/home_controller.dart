@@ -1,8 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HomeController extends GetxController {
   final Gemini gemini = Gemini.instance;
@@ -22,7 +25,16 @@ class HomeController extends GetxController {
     log('Message sent: ${chatMessage.text}');
     try {
       String question = chatMessage.text;
-      gemini.streamGenerateContent(question).listen((event) {
+      List<Uint8List>? medias;
+      if (chatMessage.medias?.isNotEmpty ?? false) {
+        medias = [File(chatMessage.medias!.first.url).readAsBytesSync()];
+      }
+      gemini
+          .streamGenerateContent(
+        question,
+        images: medias,
+      )
+          .listen((event) {
         ChatMessage? lastMessage = messages.firstOrNull;
         if (lastMessage != null && lastMessage.user == geminiUser) {
           lastMessage = messages.removeAt(0);
@@ -59,5 +71,21 @@ class HomeController extends GetxController {
     }
   }
 
- 
+  sendMediaMessage({required bool isCameraSelect}) async {
+    ImagePicker picker = ImagePicker();
+    XFile? image = await picker.pickImage(
+      source: isCameraSelect ? ImageSource.camera : ImageSource.gallery,
+    );
+    if (image != null) {
+      ChatMessage message = ChatMessage(
+        user: currentUser,
+        createdAt: DateTime.now(),
+        text: 'Describe this image',
+        medias: [
+          ChatMedia(url: image.path, fileName: '', type: MediaType.image)
+        ],
+      );
+      sendMessage(message);
+    }
+  }
 }

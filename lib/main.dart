@@ -11,6 +11,7 @@ Future<void> main() async {
   Gemini.init(apiKey: GEMINI_API_KEY);
   runApp(
     GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         title: "AskGemini",
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
