@@ -10,7 +10,10 @@ class SplashView extends GetView<SplashController> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: Image.asset('assets/icons/icon1.png'),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Image.asset('assets/icons/icon1.png',
+                  width: 200, height: 200, fit: BoxFit.cover)),
         ),
       ),
     );
