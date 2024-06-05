@@ -79,7 +79,7 @@ flutter pub get
 
 4. Create an API key from Gemini API:
 
-Visit the (Gemini API)[https://aistudio.google.com/app/apikey] to generate your API key.
+Visit the [Gemini API](https://aistudio.google.com/app/apikey) to generate your API key.
 
 5. Create a `.env` file at the root directory of the project:
 
